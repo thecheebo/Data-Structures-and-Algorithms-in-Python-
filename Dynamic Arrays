@@ -1,1 +1,41 @@
 
+╔═══════════════╗
+║  Description  ║
+╚═══════════════╝
+    > Dynamic Arrays
+        • Akin to a simplified Python List
+╔══════════════╗
+║  Attributes  ║
+╚══════════════╝
+    > Empty Array
+        • Count of Elements
+        • Capacity
+        • Low-level array?
+╔══════════════╗
+║  Operations  ║
+╚══════════════╝
+    > Main
+        • Get Length 
+        • Get element at index K
+        • Add object to end of array
+        • Resize capacity
+        • Make Array
+╔══════════════╗
+║  Complexity  ║
+╚══════════════╝
+       { O(1), O(log(n)), O(n log(n)), O(n), O(n+k), O(n^2) }
+    > Average 
+        • Index 
+        • Search
+        • Insertion
+        • Deletion
+    > Worst 
+        • Index
+        • Search
+        • Insertion
+        • Deletion
+    > Memory
+        • Space
+╔════════╗
+║  Code  ║
+╚════════╝
