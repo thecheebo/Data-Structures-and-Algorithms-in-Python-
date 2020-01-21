@@ -1,0 +1,10 @@
+def insertion_sort(a):
+    """Sort list of comparable elements into nondecreasing order"""
+    for k in range(1, len(a)):
+        current_elem = A[k]
+        j = k
+        while j > 0 and a[j-1] > cur:
+            a[j] = a[j-1]
+            j-=1
+        a[j] = current_elem
+        
