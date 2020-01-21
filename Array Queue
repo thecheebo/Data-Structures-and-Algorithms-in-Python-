@@ -1,0 +1,42 @@
+╔═══════════════╗
+║  Description  ║
+╚═══════════════╝
+    > ArrayQueue:
+        • First in, First out
+        
+╔══════════════╗
+║  Attributes  ║
+╚══════════════╝
+    • Default Capacity - 10 is moderate
+    > ArrayQueue
+        • Data
+        • Size
+        • Front Value
+
+╔══════════════╗
+║  Operations  ║
+╚══════════════╝
+        • Get length
+        • Check if empty
+        • Return front
+        • Pop Front, aka dequeue
+
+╔══════════════╗
+║  Complexity  ║
+╚══════════════╝
+       { O(1), O(log(n)), O(n log(n)), O(n), O(n+k), O(n^2) }
+    > Average 
+        • Index 
+        • Search
+        • Insertion
+        • Deletion
+    > Worst 
+        • Index
+        • Search
+        • Insertion
+        • Deletion
+    > Memory
+        • Space
+╔════════╗
+║  Code  ║
+╚════════╝
