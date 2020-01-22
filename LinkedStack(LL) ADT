@@ -26,17 +26,17 @@
 ╚══════════════╝
        { O(1), O(log(n)), O(n log(n)), O(n), O(n+k), O(n^2) }
     > Average 
-        • Index 
-        • Search
-        • Insertion
-        • Deletion
+        • Index - None
+        • Search - None
+        • Insertion - O(1)
+        • Deletion - O(1)
     > Worst 
-        • Index
-        • Search
-        • Insertion
-        • Deletion
+        • Index - None
+        • Search - None
+        • Insertion - O(1)
+        • Deletion - O(1)
     > Memory
-        • Space
+        • Space - O(n)
 ╔════════╗
 ║  Code  ║
 ╚════════╝
