@@ -1,0 +1,92 @@
+╔═══════════════╗
+║  Description  ║
+╚═══════════════╝
+    > LinkedStack w/Linked Lists
+        • Last in - First out
+╔══════════════╗
+║  Attributes  ║
+╚══════════════╝
+    > Node
+        • Data/Element
+        • Next Linked Node
+    > Linked List
+        • Head Location
+        • Size
+╔══════════════╗
+║  Operations  ║
+╚══════════════╝
+    > LinkedList
+        • Add Node to top
+        • Remove top node
+        • Return top
+        • Empty check
+        • Size Of List
+╔══════════════╗
+║  Complexity  ║
+╚══════════════╝
+       { O(1), O(log(n)), O(n log(n)), O(n), O(n+k), O(n^2) }
+    > Average 
+        • Index 
+        • Search
+        • Insertion
+        • Deletion
+    > Worst 
+        • Index
+        • Search
+        • Insertion
+        • Deletion
+    > Memory
+        • Space
+╔════════╗
+║  Code  ║
+╚════════╝
+
+class LinkedStack:
+    """LIFO Stack implementation using singly linked list for storage"""
+    
+    #Nested Node Class
+    class _Node():
+    
+        def __init__(self, data, next_node): 
+            self.data = data
+            self.next_node = next_node
+    
+    #Stack Methods    
+    def __init__(self):
+        self._head = None
+        self._size = 0
+        
+    def __len__(self):
+        return self._size
+        
+    def is_empty(self):
+        """Return true if the stack is empty"""
+        return self._size == 0
+        
+    def push(self, e):
+        """Adding data/element to the top of the stack"""
+        self._head = self._Node(e, self._head) #create and link a new node
+        self._size += 1
+    
+    def top(self):
+        """return but not remove element at top also raises exception if the stack is empty"""
+        if self.is_empty():
+            raise Empty('stack is empty')
+        return self._head._element 
+    
+    def pop(self):
+        """Remove and return the element /data from top (LIFO)
+        Raise empty exception if the stack is empty"""
+        
+        if self.is_empty():
+            raise Empty('Stack is empty')
+        answer = self._head._element
+        self._head = self._head._next
+        self._size -= 1
+        return answer
+
+a=LinkedStack()
+a.push(5)
+a.push(3)
+a.push(1)
+
