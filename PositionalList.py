@@ -1,4 +1,3 @@
-unfinished 
 ╔═══════════════╗
 ║  Description  ║
 ╚═══════════════╝
@@ -59,10 +58,10 @@ unfinished
 
 c__author__ = 'tnb'
 
-from algorithm.doublylinkedbase import _DoublyLinkedBase
 
 class PositionalList(_DoublyLinkedBase):
-
+    """A sequential container of elements allowing positional access."""
+                           
     class Position:
         def __init__(self, container, node):
             self._container = container
@@ -139,4 +138,48 @@ class PositionalList(_DoublyLinkedBase):
         old_value = original._element
         original._element = e
         return old_value
+                           
+class _DoublyLinkedBase:
+    """A base clss providing a doubly linked list representation."""
+    
+    class _Node:
+        #__slots__ = '_element','_prev','_next'      #streamline memory
+    
+        def __init__(self, element, prev, next):
+            self._element = element
+            self._prev = prev
+            self._next = next
+        
+    def __init__(self):
+        """Create an empty list."""
+        self._header = self._Node(None, None, None)
+        self._trailer = self._Node(None, None, None)
+        self._header._next = self._trailer
+        self._trailer._prev = self._header
+        self._size = 0
+        
+    def __len__(self):
+        return self._size
+    
+    def is_empty(self):
+        return self._size == 0
+
+    def _insert_between(self, e, predecessor, sucessor):
+        """Add element e between 2 nodes and return new node"""
+        newest = self._Node(e, predecessor, sucessor)   #linked to neighbors
+        predecessor._next = newest
+        sucessor._prev = newest
+        self._size += 1
+        return newest
+    
+    def _delete_node(self, node):
+        """Delete nonsentinel node from teh list and return its element"""
+        predecessor = node._prev
+        sucessor = node._next
+        predecessor._next = sucessor
+        sucessor._prev = predecessor
+        self._size -= 1
+        element = node._element                     #record deleted node
+        node._prev = node._next = node._element = None #deprecate node
+        return element                              #return deleted node
 
