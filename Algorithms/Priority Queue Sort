@@ -1,0 +1,10 @@
+def priority_queue_sort(c):             #c is a Collection of elements
+    """Sort a collection of elements stored in a positional list"""
+    n = len(c)
+    p = PriorityQueue()
+        for J in range(n)
+        element = C.delete(C.first())
+    P.add(element, element)
+    for j in range(n):
+        (k,v) = P.remove_min()
+        C.add_last(v)
