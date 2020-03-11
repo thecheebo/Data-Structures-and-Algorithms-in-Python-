@@ -1,45 +1,45 @@
-╔═══════════════╗
-║  Description  ║
-╚═══════════════╝
-    > LinkedStack w/Linked Lists
-        • Last in - First out
-╔══════════════╗
-║  Attributes  ║
-╚══════════════╝
-    > Node
-        • Data/Element
-        • Next Linked Node
-    > Linked List
-        • Head Location
-        • Size
-╔══════════════╗
-║  Operations  ║
-╚══════════════╝
-    > LinkedList
-        • Add Node to top
-        • Remove top node
-        • Return top
-        • Empty check
-        • Size Of List
-╔══════════════╗
-║  Complexity  ║
-╚══════════════╝
-       { O(1), O(log(n)), O(n log(n)), O(n), O(n+k), O(n^2) }
-    > Average 
-        • Index - None
-        • Search - None
-        • Insertion - O(1)
-        • Deletion - O(1)
-    > Worst 
-        • Index - None
-        • Search - None
-        • Insertion - O(1)
-        • Deletion - O(1)
-    > Memory
-        • Space - O(n)
-╔════════╗
-║  Code  ║
-╚════════╝
+                                                        ╔═══════════════╗
+                                                        ║  Description  ║
+                                                        ╚═══════════════╝
+                                                    > LinkedStack w/Linked Lists
+                                                        • Last in - First out
+                                                        ╔══════════════╗
+                                                        ║  Attributes  ║
+                                                        ╚══════════════╝
+                                                    > Node
+                                                        • Data/Element
+                                                        • Next Linked Node
+                                                    > Linked List
+                                                        • Head Location
+                                                        • Size
+                                                        ╔══════════════╗
+                                                        ║  Operations  ║
+                                                        ╚══════════════╝
+                                                    > LinkedList
+                                                        • Add Node to top
+                                                        • Remove top node
+                                                        • Return top
+                                                        • Empty check
+                                                        • Size Of List
+                                                        ╔══════════════╗
+                                                        ║  Complexity  ║
+                                                        ╚══════════════╝
+                                        O(1), O(log(n)), O(n log(n)), O(n), O(n+k), O(n^2) 
+                                                    > Average 
+                                                        • Index - None
+                                                        • Search - None
+                                                        • Insertion - O(1)
+                                                        • Deletion - O(1)
+                                                    > Worst 
+                                                        • Index - None
+                                                        • Search - None
+                                                        • Insertion - O(1)
+                                                        • Deletion - O(1)
+                                                    > Memory
+                                                        • Space - O(n)
+                                                        ╔════════╗
+                                                        ║  Code  ║
+                                                        ╚════════╝
 
 class LinkedStack:
     """LIFO Stack implementation using singly linked list for storage"""
@@ -89,4 +89,6 @@ a=LinkedStack()
 a.push(5)
 a.push(3)
 a.push(1)
+a.pop()
+a.top()
 
