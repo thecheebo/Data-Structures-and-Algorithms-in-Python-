@@ -1,0 +1,29 @@
+
+class PriorityQueueBase: 
+    """Abstract base class for a priority queue."""
+    
+    class _Item:
+        """Store both key and balue of PQ items"""
+        __slots__ = '_key', '_value'        #creates a map instead of a dictionary of attributes
+        
+        def __init__(self, k, v):
+            self._key = k
+            self._value = v
+        
+        def __ItemsCompare__(self, other):
+            return self._key <other._key    #compare items based on their keys
+    
+    def is_empty(self):                     #concrete method assuming abstract len
+        """return True if the Priority Queue is empty."""
+        return len(self) == 0
+
+class UnsortedPriorityQueue(PriorityQueueBase):
+    """A priority Queue implemented with an unsorted list, assumes the PQ ABC with _Item"""
+    
+    
+    def _find_min(self):                    #nonpublic utility
+        """Return Position of item with minimum key. """
+        if self.is_empty():
+            raise Empty('Priority Queue is empty')
+        small =self._data.first()
+        walk = self.data.after(small)
