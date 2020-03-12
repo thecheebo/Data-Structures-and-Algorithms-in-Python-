@@ -1,7 +1,7 @@
 class LinkedBinaryTree(BinaryTree):
-    '''Simple Binary Tree ADT implemented with Linked-List'''
+    """Simple Binary Tree ADT implemented with binary tree structure"""
     
-    class Node:
+    class _Node:
         # NOTE 'self' here is Node container
         __slots__ = ("_parent", "_left", "_right", "_elem")
         def __init__(self, element, parent=None, left=None, right=None):
@@ -24,7 +24,7 @@ class LinkedBinaryTree(BinaryTree):
             self._node = node
 
         def element(self) -> BinaryTree.Position:
-            # Override Tree ABC 
+            # Return the element stored at this postion 
             return self._node._elem
 
         def __eq__(self, other: BinaryTree.Position):
