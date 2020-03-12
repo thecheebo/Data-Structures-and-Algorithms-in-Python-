@@ -1,4 +1,19 @@
 
+class UnsortedPriorityQueue(PriorityQueueBase, LinkedDeque):
+    """A priority Queue implemented with an unsorted list, assumes the PQ ABC with _Item"""
+    
+    
+    def _find_min(self):                    #nonpublic utility
+        """Return Position of item with minimum key. """
+        if self.is_empty():
+            raise Empty('Priority Queue is empty')
+        small =self._data.first()
+        walk = self.data.after(small)
+        while walk is not None:
+
+
+
+
 class PriorityQueueBase: 
     """Abstract base class for a priority queue."""
     
@@ -17,13 +32,81 @@ class PriorityQueueBase:
         """return True if the Priority Queue is empty."""
         return len(self) == 0
 
-class UnsortedPriorityQueue(PriorityQueueBase):
-    """A priority Queue implemented with an unsorted list, assumes the PQ ABC with _Item"""
+class _DoublyLinkedBase:
+    """A base clss providing a doubly linked list representation."""
     
+    class _Node:
+        #__slots__ = '_element','_prev','_next'      #streamline memory
     
-    def _find_min(self):                    #nonpublic utility
-        """Return Position of item with minimum key. """
+        def __init__(self, element, prev, next):
+            self._element = element
+            self._prev = prev
+            self._next = next
+        
+    def __init__(self):
+        """Create an empty list."""
+        self._header = self._Node(None, None, None)
+        self._trailer = self._Node(None, None, None)
+        self._header._next = self._trailer
+        self._trailer._prev = self._header
+        self._size = 0
+        
+    def __len__(self):
+        return self._size
+    
+    def is_empty(self):
+        return self._size == 0
+
+    def _insert_between(self, e, predecessor, sucessor):
+        """Add element e between 2 nodes and return new node"""
+        newest = self._Node(e, predecessor, sucessor)   #linked to neighbors
+        predecessor._next = newest
+        sucessor._prev = newest
+        self._size += 1
+        return newest
+    
+    def _delete_node(self, node):
+        """Delete nonsentinel node from teh list and return its element"""
+        predecessor = node._prev
+        sucessor = node._next
+        predecessor._next = sucessor
+        sucessor._prev = predecessor
+        self._size -= 1
+        element = node._element                     #record deleted node
+        node._prev = node._next = node._element = None #deprecate node
+        return element                              #return deleted node
+        
+        
+
+class LinkedDeque(_DoublyLinkedBase):       #note use of inheritance
+    """Double-ended Queue implementation based on a doubly linked list"""
+    
+    def first(self):
         if self.is_empty():
-            raise Empty('Priority Queue is empty')
-        small =self._data.first()
-        walk = self.data.after(small)
+            raise Empty('Deque is empty')
+        return self._header._next._element  #real item after header
+    
+    def last(self):
+        if self.is_empty():
+            raise Empty('Deque is empty')
+        return self._trailer._prev._element
+
+    def insert_first(self, e):
+        """ add an element to front of queue """
+        self._insert_between(e, self._header, self._header._next)
+            
+    def insert_last(self, e):
+        """ add an element to back of queue """
+        self._insert_between(e, self._trailer._prev, self._trailer)
+    
+    def delete_first(self):
+        """Remove and return first element """
+        if self.is_empty():
+            raise Empty('Deque is empty')
+        return self._delete_node(self._header._next)
+    
+    def delete_last(self):
+        """Remove and return the last element """
+        if self.is_empty():
+            raise Empty('Deque is empty')  
+        return self._delete_node(self._trailer._prev)
