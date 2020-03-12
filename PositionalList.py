@@ -56,9 +56,6 @@
 ║  Code  ║
 ╚════════╝
 
-c__author__ = 'tnb'
-
-
 class PositionalList(_DoublyLinkedBase):
     """A sequential container of elements allowing positional access."""
                            
@@ -71,9 +68,11 @@ class PositionalList(_DoublyLinkedBase):
             return self._node._element
 
         def __eq__(self, other):
+            """Return True if other is a Position representing the same location"""
             return type(other) is type(self) and other._node is self._node
 
         def __ne__(self, other):
+            """Return True if other does not represent the same location."""               
             return not (self == other)
 
     def _validate(self, p):
