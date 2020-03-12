@@ -171,7 +171,7 @@ class LinkedBinaryTree(BinaryTree):
 
     #public accessors
 
-    def len (self):
+    def __len__(self):
         """Return the total number of elements in the tree."""
         return self._size    
     
@@ -214,12 +214,12 @@ class LinkedBinaryTree(BinaryTree):
         self._root = self._Node(e)
         return self._make_position(self._root)
 
-    def _add_left(self, p, e):
+    def _add_left_child(self, p, e):
         node = self._validate(p)
         if node._left is not None:
             raise ValueError("Left child already exist. Cannot add.")
         self._size += 1
-        node._left = self.Node(e, node)
+        node._left = self._Node(e, node)
         return self._make_position(node._left)
 
     def _add_right_child(self, p, e): 
@@ -227,7 +227,7 @@ class LinkedBinaryTree(BinaryTree):
         if node._right is not None:
             raise ValueError("Right child already exist. Cannot add.")
         self._size += 1
-        node._right = self.Node(e, node)
+        node._right = self._Node(e, node)
         return self._make_position(node._right)
 
     def _replace(self, p, e):
@@ -283,3 +283,19 @@ class LinkedBinaryTree(BinaryTree):
             node._right = t2._root
             t2._root = None
             t2._size = 0 
+
+    def build_bfs_tree(self, build_list: list):
+            '''Build Binary Tree data structure in breadth-first (level) order.
+            First element of build_list is considered as root of the tree.
+            '''
+            assert len(build_list) > 0 # Temporary line. Lazy.
+            L = build_list[::-1] # Shallow copy in reverse
+            root = self._add_root(L.pop())
+            levels = [root] # queue
+            while len(L) > 0:
+                node = levels.pop(0) # dequeue
+                left_node = self._add_left_child(node, L.pop())
+                if not L: break
+                right_node = self._add_right_child(node, L.pop())
+                if not L: break
+                levels.extend([left_node, right_node]) #enqueue
