@@ -3,7 +3,7 @@ class Tree:
     
     #nested Position class
     class Position:
-    """An abstraction representing the location of a single element"""
+        """An abstraction representing the location of a single element"""
         
         def element(self):
             """Return the element stored at this Position"""
@@ -24,20 +24,20 @@ class Tree:
             raise NotImplementedError('must be implemented by subclass')
             
         def parent(self, p):
-        ”””Return Position representing p s parent (or None if p is root).”””
-            raise NotImplementedError( must be implemented by subclass )
+            """Return Position representing p s parent (or None if p is root)."""
+            raise NotImplementedError('must be implemented by subclass')
         
-        def num children(self, p):
-        ”””Return the number of children that Position p has.”””
-            raise NotImplementedError( must be implemented by subclass )
+        def num_children(self, p):
+            """Return the number of children that Position p has."""
+            raise NotImplementedError('must be implemented by subclass')
             
         def children(self, p):
-        ”””Generate an iteration of Positions representing p s children.”””
-            raise NotImplementedError( must be implemented by subclass )
+            """Generate an iteration of Positions representing p s children."""
+            raise NotImplementedError('must be implemented by subclass')
             
         def len (self):
-        ”””Return the total number of elements in the tree.”””
-            raise NotImplementedError( must be implemented by subclass )
+            """Return the total number of elements in the tree."""
+            raise NotImplementedError('must be implemented by subclass')
             
         # ---------- concrete methods implemented in this class ----------
         
@@ -51,7 +51,7 @@ class Tree:
             
         def is_empty(self):
             """Return True if the tree is empty."""
-            Return True(self)== 0
+            return len(self)== 0
         
         def depth(self, p):
             """Return the number of levels separating Position p from the root."""
@@ -76,9 +76,3 @@ class Tree:
             if p is None:
                 p = self.root()
             return self.height2(p)
-            
-           
-        
-        
-            
-        
