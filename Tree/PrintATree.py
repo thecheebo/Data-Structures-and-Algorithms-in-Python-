@@ -1,7 +1,11 @@
-def print_a_tree(self)
+def print_a_tree(self, starting_position)
     if self._size == 0:
         print("There are no nodes in this tree")
+        break
+        #print(root()._node._element)
     else:
-        print(self.root()._node._element)
-    if self.num_children(self.root()) > 0:
-        print(self.left()._node._element)
+        while self.num_children(self.root()) > 0:
+            print(left()._node._element + right()._node._element)
+            print_a_tree(
+            
+        
