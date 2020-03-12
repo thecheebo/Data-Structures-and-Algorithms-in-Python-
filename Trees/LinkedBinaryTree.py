@@ -1,3 +1,116 @@
+class Tree:
+    """Abstract base class representing a tree structure"""
+    
+    #nested Position class
+    class Position:
+        """An abstraction representing the location of a single element"""
+        
+        def element(self):
+            """Return the element stored at this Position"""
+            raise NotImplementedError('must be implemented by subclass')
+        
+        def __eq__(self, other):
+            """Return True if other Position represents the same location"""
+            raise NotImplementedError('must be implemented by subclass')
+            
+        def __ne__(self, other):
+            """Return True if other does not represent the same location."""
+            return not (self == other)     #opposite of __eq__
+            
+        # ---------- abstract methods that concrete subclass must support ----------  
+       
+        def root(self):
+            """Return Position representing the tree s root (or None if empty)."""
+            raise NotImplementedError('must be implemented by subclass')
+            
+        def parent(self, p):
+            """Return Position representing p s parent (or None if p is root)."""
+            raise NotImplementedError('must be implemented by subclass')
+        
+        def num_children(self, p):
+            """Return the number of children that Position p has."""
+            raise NotImplementedError('must be implemented by subclass')
+            
+        def children(self, p):
+            """Generate an iteration of Positions representing p s children."""
+            raise NotImplementedError('must be implemented by subclass')
+            
+        def len (self):
+            """Return the total number of elements in the tree."""
+            raise NotImplementedError('must be implemented by subclass')
+            
+        # ---------- concrete methods implemented in this class ----------
+        
+        def is_root(self, p):
+            """Return True if Position P represents the root of the tree."""
+            return self.root()==p
+        
+        def is_leaf(self, p):
+            """Return true if Position p does not have any children."""
+            return self.num_children(p)== 0
+            
+        def is_empty(self):
+            """Return True if the tree is empty."""
+            return len(self)== 0
+        
+        def depth(self, p):
+            """Return the number of levels separating Position p from the root."""
+            if self.is_root(p):
+                return 0
+            else:
+                return 1 + self.depth(self.parent(p))
+                
+        def _height1(self):
+            """Return the height of the tree"""
+            return max(self.depth(p) for p in self.positions() if self.is_leaf(p))
+            
+        def _height2(self, p):
+            """"Return the heightof the subtree rooted at Position p"""
+            if self.is_leaf(p):
+                return 0
+            else:
+                return 1 +max(self.height2(c) for c in self.children(p))
+                    
+        def height(self, p=None):
+            """Return the heigh of subtree rooted at Position P.  If P is none, return the height of the entire tree."""
+            if p is None:
+                p = self.root()
+            return self.height2(p)
+
+class BinaryTree(Tree):
+    """Abstract base class representing a binary tree structure."""
+
+    #--------------------------Additional Abstract methods-----------------------------------
+    def left(self, p):
+        """Return a Position representing p's left child.
+        Return None if p does not have a left child."""
+        raise NotImplementedError('must be implemented by subclass')
+        
+    def right(self, p):
+        """Return a Position representing p's right child.
+        Return None if p does not have a left child."""
+        raise NotImplementedError('must be implemented by subclass')
+    
+    #--------------------------Additional Abstract methods-----------------------------------
+    def sibling(self, p):
+        """Return a Position representing p's sibling (or None if no sibling)."""
+        parent = self.parent(p)
+        if parent is None:                  #p must be the root, root has no sibling if none
+            return None
+        else:
+            if p == self.left(parent):
+                return self.right(parent)   #possibly None
+            else:
+                return self.left(parent)    #possibly None
+    
+    
+    def children(self, p):
+        """Generate an iteration of Positions representing p's children"""
+        if self.left(p) is not None:
+            yield self.left(p)
+        if self.right(p) is not None:
+            yield self.right(p)
+
 class LinkedBinaryTree(BinaryTree):
     """Simple Binary Tree ADT implemented with binary tree structure"""
     
@@ -170,98 +283,3 @@ class LinkedBinaryTree(BinaryTree):
             node._right = t2._root
             t2._root = None
             t2._size = 0 
-
-    #--------------------------------------------------------------------------
-    # Adding basic public methods for tree constructions and traversal
-"""
-    def build_bfs_tree(self, build_list: list):
-        '''Build Binary Tree data structure in breadth-first (level) order.
-           First element of build_list is considered as root of the tree.
-        '''
-        assert len(build_list) > 0 # Temporary line. Lazy.
-        L = build_list[::-1] # Shallow copy in reverse
-        root = self._add_root(L.pop())
-        levels = [root] # queue
-        while len(L) > 0:
-            node = levels.pop(0) # dequeue
-            left_node = self._add_left_child(node, L.pop())
-            if not L: break
-            right_node = self._add_right_child(node, L.pop())
-            if not L: break
-            levels.extend([left_node, right_node]) #enqueue
-
-    def build_bst(self, build_list: list):
-        '''Build Binary Search Tree data struture.
-           First element of build_list is considered as root of the tree.
-        '''
-        assert len(build_list) > 0 # Temporary line. Lazy.
-        def _insert(pos, elem):
-            if elem < pos.element(): # ascending. Change to > for desc. order
-                if self.left_child(pos):
-                    _insert(self.left_child(pos), elem)
-                else:
-                    self._add_left_child(pos, elem)
-            else:
-                if self.right_child(pos):
-                    _insert(self.right_child(pos), elem)
-                else:
-                    self._add_right_child(pos, elem)
-        root = self._add_root(build_list[0])
-        for idx in range(1, len(build_list)):
-            _insert(root, build_list[idx])
-
-    def traverse_breadth_first(self, p: Position = None) -> iter:
-        '''Breadth-first binary tree traversal starting from node Position p.
-        '''
-        root = self.root() if p is None else p
-        levels = [root] # queue
-        while levels:
-            node = levels.pop(0) # dequeue
-            yield node.element() # visited
-            for c in self.children(node):
-                levels.append(c) # enqueue
-
-    def traverse_preorder(self, p: Position = None) -> iter:
-        '''Depth-first binary tree traversal in pre-order starting from node p. 
-           Roughly speaking, visit root then all other children.
-        '''
-        def _pre(root):
-            yield root.element()
-            for c in self.children(root):
-                for other in _pre(c):
-                    yield other
-        root = self.root() if p is None else p
-        if not self.is_empty():
-            for position in _pre(root):
-                yield position
-
-    def traverse_postorder(self, p: Position = None) -> iter:
-        '''Depth-first binary tree traversal in post-order starting from node p. 
-           Roughly speaking, visit all children then root.
-        '''
-        def _post(root):
-            for c in self.children(root):
-                for other in _post(c):
-                    yield other
-            yield root.element()
-        root = self.root() if p is None else p
-        if not self.is_empty():
-            for position in _post(root):
-                yield position
-
-    def traverse_inorder(self, p: Position = None) -> iter:
-        '''Depth-first binary tree traversal in in-order starting from node p. 
-           Roughly speaking, visit left-most child, then root, then remaining 
-           children.
-        '''
-        def _inorder(root):
-            if self.left_child(root):
-                for left in _inorder(self.left_child(root)):
-                    yield left
-            yield root.element()
-            if self.right_child(root):
-                for right in _inorder(self.right_child(root)):
-                    yield right
-        root = self.root() if p is None else p
-        for position in _inorder(root):
-            yield position"""
