@@ -77,7 +77,7 @@ class PositionalList(_DoublyLinkedBase):
             return not (self == other)
 
     def _validate(self, p):
-        if not isinstance(p, self.Positon):
+        if not isinstance(p, self.Position):
             raise TypeError('p must be proper Position type')
         if p._container is not self:
             raise ValueError('p does not belong to this container')
@@ -95,7 +95,7 @@ class PositionalList(_DoublyLinkedBase):
         return self._make_position(self._header._next)
 
     def last(self):
-        return self._make_position(self.traier._prev)
+        return self._make_position(self._trailer._prev)
 
     def before(self, p):
         node = self._validate(p)
@@ -183,3 +183,13 @@ class _DoublyLinkedBase:
         node._prev = node._next = node._element = None #deprecate node
         return element                              #return deleted node
 
+
+                           trial code:
+                           a= PositionalList()
+root = a.add_first(10)
+p20 = a.add_after(root, 20)
+p30 = a.add_after(p20, 30)
+a.add_last(40)
+a.add_last(50)
+                           
+                           
