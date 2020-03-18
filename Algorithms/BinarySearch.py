@@ -6,7 +6,7 @@ def binary_search(data, target, low, high):
     if low > high:
         return False    #interval is empty so there is no match
     else:
-        mid = (low+high // 2
+        mid = (low+high) // 2
         if target == data [mid]:
             return True
         elif target < data [mid]:
