@@ -1,3 +1,4 @@
+"""
 ╔═══════════════╗
 ║  Description  ║
 ╚═══════════════╝
@@ -41,7 +42,7 @@
 ╔════════╗
 ║  Code  ║
 ╚════════╝
-
+"""
 class LinkedQueue:
     """LIFO Stack implementation using singly linked list for storage"""
     
