@@ -1,11 +1,3 @@
-getitem , setitem , delitem , len , and
-iter .
-
-__contains
-
-def setdefault
-
-
 class MapBase(MutableMapping)
     """Abstract Base class that includes nonpublic _Item class"""
     
