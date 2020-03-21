@@ -13,4 +13,5 @@ class UnsortedTableMap(MapBase):
     
     def __setitem__(self, k, v):
         """assign value v to key k, overwriting existing value if present"""
-
+        for item in self._table:
+        	if k == item.key:
