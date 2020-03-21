@@ -47,6 +47,12 @@ Class Tree:
         return _height(p)
                    
 class BinaryTree(Tree):
+    
+	class _Node:
+    	def __init__(self, element, parent = None, left= None, right = None):
+	    	self.
+				   
+    class Positiion 
     def sibling(self, p):
         """Return a position representing p's sibling(or None if there isn't a sibling)."""
         parent = self.parent(p)
@@ -58,6 +64,10 @@ class BinaryTree(Tree):
             else:
                 return self.left(parent)
     def children(self, p):
-                   
+        """Generate an iteration of Positions representing p's children"""
+        if self.left(p) is not None:
+            yield self.left(p)
+        if self.right(p)is not None:
+            yield self.right(p)
                    
                   
