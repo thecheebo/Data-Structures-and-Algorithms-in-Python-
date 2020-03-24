@@ -13,14 +13,14 @@ class HashTable:
 
     def __setitem__(self, key, value):
         self.length += 1
-        hashed_key = self._hash(key)
-        while self.table[hashed_key] is not None:
-            if self.table[hashed_key][0] == key:
+        index = self._hash(key)
+        while self.table[index] is not None:
+            if self.table[index][0] == key:
                 self.length -= 1
                 break
-            hashed_key = self._increment_key(hashed_key)
+            index = self._increment_key(index)
         tuple = (key, value)
-        self.table[hashed_key] = tuple
+        self.table[index] = tuple
         if self.length / float(self.max_length) >= self.max_load_factor:
             self._resize()
 
@@ -40,18 +40,18 @@ class HashTable:
         return (key + 1) % self.max_length
 
     def _find_item(self, key):
-        hashed_key = self._hash(key)
-        if self.table[hashed_key] is None:
+        index = self._hash(key)
+        if self.table[index] is None:
             raise KeyError
-        if self.table[hashed_key][0] != key:
-            original_key = hashed_key
-            while self.table[hashed_key][0] != key:
-                hashed_key = self._increment_key(hashed_key)
-                if self.table[hashed_key] is None:
+        if self.table[index][0] != key:
+            original_key = index
+            while self.table[index][0] != key:
+                index = self._increment_key(index)
+                if self.table[index] is None:
                     raise KeyError
-                if hashed_key == original_key:
+                if index == original_key:
                     raise KeyError
-        return hashed_key
+        return index
 
     def _resize(self):
         self.max_length *= 2
