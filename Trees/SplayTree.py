@@ -4,6 +4,13 @@ Source:
 
 https://en.wikipedia.org/wiki/Splay_tree
 https://www.youtube.com/watch?v=IBY4NtxmGg8
+
+Time complexity in big O notation
+Algorithm		Average	Worst case
+Space		O(n)	O(n)
+Search		O(log n)	amortized O(log n)
+Insert		O(log n)	amortized O(log n)
+Delete		O(log n)	amortized O(log n)
 """
 
 
