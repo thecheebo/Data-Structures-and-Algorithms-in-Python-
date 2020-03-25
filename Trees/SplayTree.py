@@ -10,7 +10,8 @@ https://www.youtube.com/watch?v=IBY4NtxmGg8
 class Node:
     def __init__(self, key):
         self.key = key
-        self.left = self.right = None
+        self.left = None 
+        self.right = None
 
     def equals(self, node):
         return self.key == node.key
@@ -24,12 +25,10 @@ class SplayTree:
         if (self.root == None):
             self.root = Node(key)
             return
-
         self.splay(key)
         if self.root.key == key:
             # If the key is already there in the tree, don't do anything.
             return
-
         n = Node(key)
         if key < self.root.key:
             n.left = self.root.left
@@ -122,6 +121,7 @@ class SplayTree:
         t.left = self.header.right
         t.right = self.header.left
         self.root = t
+        
 a = SplayTree()
 a.insert(5)
 a.insert(15)
