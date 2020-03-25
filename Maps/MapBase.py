@@ -17,4 +17,5 @@ class MapBase(MutableMapping)
         
         def __compareItems__(self, other):
             return self.key <other._key     #compare items based on their keys
-            
+
+        hmmmm
