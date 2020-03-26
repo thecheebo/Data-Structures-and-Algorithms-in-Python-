@@ -3,7 +3,7 @@ import random
 class InsertError(Exception):
     pass
     
-class SingleNode(object):
+class SingleNode():
     """
     A simple, singly linked list node.
     """
@@ -32,7 +32,7 @@ class SingleNode(object):
     def __ne__(self, other):
         return self.value != other.value
         
-class LinkedList(object):
+class LinkedList():
     """
     A simple linked list.
     """
