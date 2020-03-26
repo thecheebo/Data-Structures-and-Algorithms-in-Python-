@@ -66,9 +66,15 @@ class LinkedList():
         self.root = root
         self.size = 0
     def add_node(self, data):
-        new_node = Node(data, self.root)
-        self.root = new_node
-        self.size +=1        
+        if self.root = None:
+            new_node = Node(data)
+            self.root = new_node
+            self.size +=1
+        while self.next_node != None:
+            
+        else:
+            new_node = Node(data)
+            
     def remove_node(self, data):
         if self.data == data:
             
