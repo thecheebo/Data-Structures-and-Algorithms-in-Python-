@@ -25,7 +25,7 @@ class Tree:
 
     def parent(self, p):
         """Return Position representing p s parent (or None if p is root)."""
-        raise NotImplementedError( must be implemented by subclass )
+        raise NotImplementedError( must be implemented by subclass)
 
     def num children(self, p):
         """Return the number of children that Position p has."""
