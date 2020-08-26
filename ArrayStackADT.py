@@ -44,7 +44,7 @@ class ArrayStack:
     """LIFO Stack implementation using a python list as underlying storage."""
     def __init__(self):
         """Create an empty stack."""
-        self._data = []                  #nonpublic list instance
+        self._data = []                 
         
     def __len__(self):
         return len(self._data) == 0
