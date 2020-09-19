@@ -2,7 +2,7 @@
 ║  Description  ║
 ╚═══════════════╝
     > ArrayStack
-        • Last In - First Out
+        • Last In - First Out 
 ╔══════════════╗
 ║  Attributes  ║
 ╚══════════════╝
@@ -41,7 +41,7 @@
 ╚════════╝
 
 class ArrayStack:
-    """LIFO Stack implementation using a python list as underlying storage."""
+    """LIFO Stack implementation using a python list as underlying storage. """
     def __init__(self):
         """Create an empty stack."""
         self._data = []                 
