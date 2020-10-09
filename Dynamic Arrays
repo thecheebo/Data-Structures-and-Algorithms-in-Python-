@@ -2,10 +2,10 @@
 ╔═══════════════╗
 ║  Description  ║
 ╚═══════════════╝
-    > Dynamic Arrays
+    > Dynamic Arrays  
         • Akin to a simplified Python List
 ╔══════════════╗
-║  Attributes  ║
+║  Attributes  ║ 
 ╚══════════════╝
     > Empty Array
         • Count of Elements
