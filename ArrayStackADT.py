@@ -2,7 +2,7 @@
 ║  Description  ║
 ╚═══════════════╝
     > ArrayStack
-        • Last In - First Out 
+        • Last In - First Out hg
 ╔══════════════╗
 ║  Attributes  ║
 ╚══════════════╝
